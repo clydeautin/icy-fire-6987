@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+Chef.destroy_all
+
+Chef.create([
+  { name: 'Gordon Ramsay' },
+  { name: 'Jamie Oliver' },
+  { name: 'Thomas Keller' },
+  { name: 'Alice Waters' },
+  { name: 'Massimo Bottura' },
+  { name: 'José Andrés' }
+])

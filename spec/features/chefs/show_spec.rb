@@ -26,7 +26,6 @@ RSpec.describe 'Chef Show page' do
       expect(page).to have_content("Marinara")
       expect(page).to have_content("Bread")
       expect(page).to have_content("Garlic")
-      save_and_open_page
 
     end
   end
