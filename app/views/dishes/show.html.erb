@@ -3,11 +3,12 @@
 
 <h2>Ingredients</h2>
 
-<% @dish.ingredients.each do |ingredient| %>
-  <div class ="ingredient-<%= ingredient.id %>">
+<% @dish.dish_ingredients.each do |dish_ingredient| %>
+  <% ingredient = dish_ingredient.ingredient %>
+  <div class="ingredient-<%= ingredient.id %>">
     <p>Ingredient name: <%= ingredient.name %></p>
     <p>Calories: <%= ingredient.calories %></p>
-    <%= button_to "Delete Ingredient", "dishes/#{@dish.id}/ingredients/#{ingredient.id}", method: :ddelete, data: { confirm: "Are you sure you want to delete this ingredient?" }, class: "delete-button"%>
+    <%= button_to "Delete Ingredient", "/dish_ingredients/#{dish_ingredient.id}", method: :delete, data: { confirm: "Are you sure you want to delete this ingredient?" }, class: "delete-button" %>
   </div>
 <% end %>
 

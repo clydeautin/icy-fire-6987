@@ -51,9 +51,8 @@ RSpec.describe 'the show dishes page' do
       parmesan = Ingredient.create!(name: 'Parmesan', calories:22 )
       
       visit "/dishes/#{spag.id}"
-      save_and_open_page
       
-      within "#ingredient-#{sauce.id}" do
+      within ".ingredient-#{sauce.id}" do
         expect(page).to have_button("Delete Ingredient")
         click_button("Delete Ingredient")
       end
@@ -61,7 +60,7 @@ RSpec.describe 'the show dishes page' do
       expect(current_path).to eq("/dishes/#{spag.id}")
       expect(page).to_not have_content("Ingredient name: #{sauce.name}")
       expect(page).to_not have_content("Total Calories: 250")
-      
+      save_and_open_page
     end
   end
 end
