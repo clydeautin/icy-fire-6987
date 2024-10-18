@@ -41,5 +41,27 @@ RSpec.describe 'the show dishes page' do
       expect(page).to have_content("Calories: #{parmesan.calories}")
       
     end
+    it 'lets me remove an ingredient from the dish' do
+      chefA = Chef.create!(name: 'Ice Man')
+      spag = chefA.dishes.create!(name: 'Spaghetti a la Marinara', description: 'Easy to make!')
+      pasta = Ingredient.create!(name: 'Spaghetti', calories: 200)
+      sauce = Ingredient.create!(name: 'Marinara', calories: 50)
+      DishIngredient.create!(dish: spag, ingredient: pasta)
+      DishIngredient.create!(dish: spag, ingredient: sauce)
+      parmesan = Ingredient.create!(name: 'Parmesan', calories:22 )
+      
+      visit "/dishes/#{spag.id}"
+      save_and_open_page
+      
+      within "#ingredient-#{sauce.id}" do
+        expect(page).to have_button("Delete Ingredient")
+        click_button("Delete Ingredient")
+      end
+
+      expect(current_path).to eq("/dishes/#{spag.id}")
+      expect(page).to_not have_content("Ingredient name: #{sauce.name}")
+      expect(page).to_not have_content("Total Calories: 250")
+      
+    end
   end
 end
